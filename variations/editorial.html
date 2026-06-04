@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>권수진 · AAIC — Editorial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<style>
+  :root{
+    --paper:#FCFDFA;
+    --paper-2:#F1F4ED;
+    --ink:#1B2A1F;
+    --ink-soft:#5A6A5C;
+    --line:#DCE4D7;
+    --green:#2E6B41;
+    --forest:#1F3D2A;
+    --gold:#B79A65;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:"Pretendard","Spectral",serif;-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 56px}
+  .rv{opacity:0;transform:translateY(22px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+  .rv.in{opacity:1;transform:none}
+
+  nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand img{height:26px;display:block}
+  .navlinks{display:flex;gap:34px}
+  .navlinks a{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;transition:color .25s}
+  .navlinks a:hover{color:var(--green)}
+
+  header{padding:96px 0 104px;position:relative}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+  .eyebrow{display:flex;align-items:center;gap:14px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--green);margin-bottom:34px}
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+  .eyebrow .ko{color:var(--ink-soft);letter-spacing:.04em}
+  h1.name{font-family:"Spectral",serif;font-weight:300;font-size:clamp(58px,8vw,108px);line-height:.96;letter-spacing:-.01em;color:var(--forest)}
+  h1.name .kr{display:block;font-weight:500}
+  h1.name .en{display:block;font-style:italic;color:var(--ink-soft);font-size:.42em;letter-spacing:.01em;margin-top:16px;font-weight:300}
+  .role{margin-top:36px;font-size:16px;color:var(--ink);line-height:1.7}
+  .role b{color:var(--green);font-weight:600}
+  .role .en{display:block;font-family:"Spectral",serif;font-style:italic;font-size:14px;color:var(--ink-soft);margin-top:6px}
+  .portrait{position:relative}
+  .portrait img{width:100%;border-radius:4px;display:block;filter:saturate(1.02)}
+  .portrait .tag{position:absolute;left:-14px;bottom:26px;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--green);padding:10px 16px;font-size:12px;color:var(--ink-soft);letter-spacing:.02em}
+  .portrait .tag b{display:block;color:var(--ink);font-weight:600;font-size:13px}
+  .hero-lede{margin-top:62px;border-top:1px solid var(--line);padding-top:30px;max-width:760px}
+  .hero-lede p{font-family:"Spectral",serif;font-weight:300;font-size:clamp(24px,3.2vw,34px);line-height:1.4;letter-spacing:-.005em;color:var(--forest)}
+  .hero-lede .en{display:block;font-style:italic;font-size:16px;color:var(--ink-soft);margin-top:14px;line-height:1.6}
+
+  section{padding:100px 0;border-top:1px solid var(--line)}
+  .sec-head{display:grid;grid-template-columns:120px 1fr;gap:20px;margin-bottom:56px}
+  .sec-num{font-family:"Spectral",serif;font-style:italic;font-size:16px;color:var(--green)}
+  .sec-title{font-family:"Spectral",serif;font-weight:400;font-size:clamp(30px,4.4vw,46px);line-height:1.05;letter-spacing:-.01em;color:var(--forest)}
+  .sec-title .en{display:block;font-size:14px;font-style:italic;letter-spacing:.06em;color:var(--ink-soft);text-transform:none;margin-top:10px}
+
+  .about-grid{display:grid;grid-template-columns:120px 1fr;gap:20px}
+  .about-body{max-width:680px}
+  .about-body p{font-family:"Spectral",serif;font-weight:300;font-size:24px;line-height:1.62}
+  .about-body p + p{margin-top:24px}
+  .about-body em{font-style:normal;color:var(--green);font-weight:500}
+  .about-en{margin-top:32px;padding-top:24px;border-top:1px solid var(--line);font-size:15px;line-height:1.7;color:var(--ink-soft);max-width:620px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:40px}
+  .chips span{font-size:13px;color:var(--forest);background:var(--paper-2);border:1px solid var(--line);border-radius:999px;padding:8px 16px}
+
+  /* space */
+  .space-figure{margin-top:8px;border:1px solid var(--line);background:#fff;border-radius:6px;overflow:hidden}
+  .space-figure img{width:100%;display:block}
+  .space-cap{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-soft)}
+  .space-cap b{font-family:"Spectral",serif;font-style:italic;color:var(--forest);font-weight:500;font-size:15px}
+  .space-lead{display:grid;grid-template-columns:120px 1fr;gap:20px;margin-bottom:46px}
+  .space-lead .big{max-width:720px;font-family:"Spectral",serif;font-weight:300;font-size:clamp(26px,3.6vw,40px);line-height:1.32;color:var(--forest)}
+  .space-lead .big b{color:var(--green);font-weight:500}
+  .space-lead .en{display:block;font-style:italic;font-size:16px;color:var(--ink-soft);margin-top:16px;line-height:1.6}
+
+  .aw{display:grid;grid-template-columns:120px 1fr;gap:20px}
+  .aw-list{max-width:760px}
+  .aw-row{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:baseline;padding:22px 0;border-top:1px solid var(--line)}
+  .aw-row:first-child{border-top:none}
+  .aw-title{font-family:"Spectral",serif;font-size:20px;font-weight:400}
+  .aw-title .en{display:block;font-size:13px;font-style:italic;color:var(--ink-soft);margin-top:4px}
+  .aw-year{font-family:"Spectral",serif;font-style:italic;font-size:15px;color:var(--green)}
+  .placeholder{opacity:.5}
+  .ph-note{margin-top:24px;font-size:12.5px;color:var(--ink-soft);font-style:italic;font-family:"Spectral",serif}
+  .mini-label{font-family:"Spectral",serif;font-style:italic;font-size:16px;color:var(--green);margin:0 0 26px}
+  .act-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-bottom:30px}
+  .act{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden;transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s}
+  .act:hover{transform:translateY(-5px);box-shadow:0 22px 50px -28px rgba(31,61,42,.4)}
+  .act-media{background:var(--paper-2);display:flex;align-items:center;justify-content:center;padding:24px;border-bottom:1px solid var(--line)}
+  .act-media img{max-height:300px;max-width:100%;display:block;box-shadow:0 14px 32px -18px rgba(0,0,0,.4)}
+  .act-body{padding:24px 26px 28px}
+  .act-kind{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:12px}
+  .act-body h3{font-family:"Spectral",serif;font-weight:500;font-size:22px;color:var(--forest);line-height:1.25}
+  .act-en{font-family:"Spectral",serif;font-style:italic;font-size:14px;color:var(--ink-soft);margin-top:6px}
+  .act-meta{font-size:13px;color:var(--ink-soft);margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+  .aw-row{grid-template-columns:64px 1fr auto;display:grid;gap:22px;align-items:center;padding:20px 0;border-top:1px solid var(--line)}
+  .aw-thumb{width:64px;height:82px;border:1px solid var(--line);overflow:hidden;background:#fff}
+  .aw-thumb img{width:100%;height:100%;object-fit:cover}
+  .aw-main .aw-title{font-family:"Spectral",serif;font-size:19px;font-weight:500;color:var(--forest);line-height:1.3}
+  .aw-main .aw-title .en{display:block;font-size:13px;font-style:italic;color:var(--ink-soft);font-weight:400;margin-top:5px;line-height:1.5}
+  .aw-sub{font-size:12.5px;color:var(--ink-soft);margin-top:7px}
+  .aw-row.notb{grid-template-columns:1fr auto}
+  .bookf{display:flex;gap:28px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:6px;padding:24px;max-width:600px;transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s}
+  .bookf:hover{transform:translateY(-4px);box-shadow:0 22px 50px -28px rgba(31,61,42,.4)}
+  .bookf-media img{width:148px;display:block;box-shadow:0 12px 28px -16px rgba(0,0,0,.4)}
+  .bookf-body h3{font-family:"Spectral",serif;font-weight:500;font-size:20px;color:var(--forest);line-height:1.3;margin:8px 0 4px}
+  @media(max-width:760px){.bookf{flex-direction:column;align-items:flex-start}}
+  @media(max-width:760px){.act-grid{grid-template-columns:1fr}.aw-row{grid-template-columns:52px 1fr;gap:16px}.aw-row .aw-year{grid-column:2;font-size:13px}}
+
+  footer{padding:104px 0 64px;border-top:1px solid var(--line);background:var(--paper-2)}
+  .ct-label{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--green);margin-bottom:28px}
+  .ct-mail{font-family:"Spectral",serif;font-weight:300;font-size:clamp(32px,5.4vw,64px);line-height:1;letter-spacing:-.01em;color:var(--forest);text-decoration:none;display:inline-block;position:relative}
+  .ct-mail::after{content:"";position:absolute;left:0;bottom:-8px;width:100%;height:1px;background:var(--green);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+  .ct-mail:hover::after{transform:scaleX(1)}
+  .ct-foot{margin-top:72px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:28px;flex-wrap:wrap;gap:20px}
+  .ct-foot img{height:54px}
+  .ct-foot .small{font-size:12.5px;color:var(--ink-soft);letter-spacing:.04em;text-align:right}
+  .ct-foot .small b{color:var(--ink);font-weight:500}
+
+  @media(max-width:760px){
+    .wrap{padding:0 26px}
+    .hero-grid,.sec-head,.about-grid,.aw,.space-lead{grid-template-columns:1fr}
+    .portrait{order:-1;max-width:360px}
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <div class="brand"><img src="../assets/aaic-wordmark.png" alt="AAIC" /></div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#space">Space</a>
+      <a href="#awards">Activities</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow rv">
+          <span class="dot"></span>
+          <span>Active Aging Institute for Community</span>
+        </div>
+        <h1 class="name rv">
+          <span class="kr">권수진</span>
+          <span class="en">Sujin&nbsp;Kwon</span>
+        </h1>
+        <div class="role rv">
+          경희대학교 스마트도시부동산학과 <b>박사과정</b> · JLL Korea <b>물류·산업 부동산 디렉터</b>
+          <span class="en">PhD Candidate, Smart City Real Estate, Kyung Hee University · Director, Logistics &amp; Industrial Real Estate, JLL Korea</span>
+        </div>
+      </div>
+      <div class="portrait rv">
+        <img src="../assets/portrait.jpg" alt="권수진" />
+        <div class="tag"><b>AAIC · Social Salon</b>Active Aging in Community</div>
+      </div>
+    </div>
+    <div class="hero-lede rv">
+      <p>지속가능한 액티브 에이징, 그 공간은 도시공원이어야 합니다.</p>
+      <span class="en">Sustainable active aging — and that space should be an urban park.</span>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-num">01 — 소개</div>
+      <h2 class="sec-title">About<span class="en">we make the space, we run the space, we study the space</span></h2>
+    </div>
+    <div class="about-grid">
+      <div></div>
+      <div class="about-body rv">
+        <p>저는 AAIC에서 <em>우리가 직접 만들고 우리가 운영하는</em> 커뮤니티 공간을 연구합니다.</p>
+        <p>AI 시대의 지속가능하고 고령친화적인 도시 — 서로 빼앗지 않고도 각자의 자리에서 안전하고 의미 있게 살아갈 수 있는 공간을 묻습니다.</p>
+        <p>19세기 말 빈(Wien)의 살롱처럼, 사람과 자본과 생각이 자연스럽게 머무르며 가치를 만들어내는, <em>오래 머물고 싶은 도시의 녹색 공간</em>을 꿈꿉니다.</p>
+        <div class="about-en">At AAIC I study the community spaces we build and operate ourselves. A PhD candidate in Smart City Real Estate and a director of logistics &amp; industrial real estate at JLL Korea — researching sustainable, age-friendly cities, and green urban places where people, capital, and ideas linger and create value, like the salons of late-19th-century Vienna.</div>
+        <div class="chips">
+          <span>경희대 스마트도시부동산 박사과정</span>
+          <span>JLL Korea · 물류·산업 부동산 디렉터</span>
+          <span>아주대 물류SCM 공학석사 · 경희대 경영학 학사</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="space">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-num">02 — 공간</div>
+      <h2 class="sec-title">The Space<span class="en">active aging in community, as an urban park</span></h2>
+    </div>
+    <div class="space-lead rv">
+      <div></div>
+      <div class="big">
+        고령화사회에서도 지속가능한 <b>‘Active Aging in Community’</b>를 위한 공간. 그 답은 <b>도시공원</b>입니다.
+        <span class="en">A space for active aging that stays sustainable in an aging society — and the answer is the urban park.</span>
+      </div>
+    </div>
+    <div class="about-grid">
+      <div></div>
+      <div class="space-figure rv">
+        <img src="../assets/social-salon.png" alt="Le Social Salon" />
+        <div class="space-cap"><b>Le Social Salon</b><span>Est. 1977 · 우리가 만들고 운영하는 공간</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="awards">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-num">03 — 수상 · 활동</div>
+      <h2 class="sec-title">Awards &amp; Activities<span class="en">selected recognition and work</span></h2>
+    </div>
+    <div class="mini-label rv">활동 · Activities</div>
+    <div class="bookf rv">
+      <div class="bookf-media"><img src="../assets/book-cover.png" alt="물류부동산" /></div>
+      <div class="bookf-body">
+        <div class="act-kind">저서 · Book</div>
+        <h3>물류부동산 — 물류는 어디에 머무는가?</h3>
+        <div class="act-en">A Short Introduction to Logistics Real Estate</div>
+        <div class="act-meta">한국지식문화원 · 저자 권수진</div>
+      </div>
+    </div>
+    <div class="aw" style="margin-top:28px">
+      <div></div>
+      <div class="aw-list">
+        <div class="aw-row notb rv">
+          <div class="aw-main">
+            <div class="aw-title">강연 · Spaces for Active Aging<span class="en">고령자 생활 지원을 위한 주민공동시설 공급 활성화 방안</span></div>
+            <div class="aw-sub">2025 Housing Research Seminar VII · 경희대 BK21·NRF</div>
+          </div>
+          <div class="aw-year">2025.11.04</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mini-label rv" style="margin-top:58px">수상 · Awards</div>
+    <div class="aw">
+      <div></div>
+      <div class="aw-list">
+        <div class="aw-row notb rv">
+          <div class="aw-main">
+            <div class="aw-title">우수논문상 · 대한국토·도시계획학회<span class="en">‘Active Aging in Community’를 위한 도심공원 내 복합 문화공간에 대한 지불의사 결정요인</span></div>
+            <div class="aw-sub">2025 추계학술대회 · 권수진 · 김승정 · 원재웅</div>
+          </div>
+          <div class="aw-year">2025.11</div>
+        </div>
+        <div class="aw-row notb rv">
+          <div class="aw-main">
+            <div class="aw-title">우수논문상 · 한국부동산정책학회<span class="en">신노년층을 위한 도심공원 내 다목적 문화공간의 경제적 가치 결정요인 (Social Salon)</span></div>
+            <div class="aw-sub">2025 상반기 학술대회 대학원 세션 · 권수진 · 김승정 · 원재웅</div>
+          </div>
+          <div class="aw-year">2025.06</div>
+        </div>
+        <div class="aw-row notb rv">
+          <div class="aw-main">
+            <div class="aw-title">Early-Bird Star Award<span class="en">가장 부지런한 아침을 보낸 사람에게 · 주식회사 이도(YIDO)</span></div>
+            <div class="aw-sub">LM사업팀 · 2022.12</div>
+          </div>
+          <div class="aw-year">2022.12</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="ct-label rv">Contact</div>
+    <a class="ct-mail rv" href="mailto:socialsalon2027@gmail.com">socialsalon2027@gmail.com</a>
+    <div class="ct-foot rv">
+      <img src="../assets/aaic-logo.png" alt="AAIC — Active Aging Institute for Community" />
+      <div class="small">권수진 <b>Sujin Kwon</b><br />Active Aging Institute for Community · © 2026 AAIC</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    const els=[...document.querySelectorAll('.rv')];
+    els.forEach((el,i)=>{ el.style.transitionDelay=(Math.min(i%6,5)*60)+'ms'; });
+    function reveal(){
+      const vh=window.innerHeight||document.documentElement.clientHeight;
+      for(const el of els){ if(el.classList.contains('in'))continue;
+        const r=el.getBoundingClientRect();
+        if(r.top < vh*0.92 && r.bottom > 0) el.classList.add('in'); }
+    }
+    reveal();
+    window.addEventListener('scroll', reveal, {passive:true});
+    window.addEventListener('resize', reveal);
+  })();
+</script>
+</body>
+</html>
